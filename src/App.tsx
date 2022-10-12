@@ -1,25 +1,38 @@
-import logo from './logo.svg'
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+    const { height, width } = useState({
+        height: document.documentElement.clientHeight,
+        width: document.documentElement.clientWidth,
+    })[0]
+    const [gofState, setgofState] = useState(
+        seedGameOfLife(width / 20, height / 20)
+    )
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            {gofState.map((gofStateY) => (
+                <div>
+                    {gofStateY.map((gofstateX) => (
+                        <span>ab</span>
+                    ))}
+                </div>
+            ))}
         </div>
     )
+}
+
+function seedGameOfLife(width: number, height: number): Array<Array<boolean>> {
+    const seedY: Array<Array<boolean>> = []
+    for (let i = 0; i < height; i++) {
+        const seedX: Array<boolean> = []
+        for (let j = 0; j < width; j++) {
+            seedX.push(Math.floor(Math.random() * 10) % 2 === 0)
+        }
+        seedY.push(seedX)
+    }
+    return seedY
 }
 
 export default App
