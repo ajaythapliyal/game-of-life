@@ -4,3 +4,7 @@
     height: 20px;
     width: 20px;
 }
+
+.hide{
+    opacity: 0;
+}
