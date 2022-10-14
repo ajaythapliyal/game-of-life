@@ -1,38 +1,26 @@
 import { useState } from 'react'
 import './App.css'
+import Cell from './cell/Cell'
+import { seedGameOfLife } from './util'
 
 function App() {
     const { height, width } = useState({
         height: document.documentElement.clientHeight,
         width: document.documentElement.clientWidth,
     })[0]
-    const [gofState, setgofState] = useState(
-        seedGameOfLife(width / 20, height / 20)
+    const [gofState, setGofState] = useState(
+        seedGameOfLife(Math.floor(width / 30), Math.floor(height / 30))
     )
 
     return (
         <div className="App">
-            {gofState.map((gofStateY) => (
-                <div>
-                    {gofStateY.map((gofstateX) => (
-                        <span>ab</span>
-                    ))}
-                </div>
-            ))}
+            {gofState.map((gofStateY, indexY) =>
+                gofStateY.map((gofState, index) => (
+                    <Cell isAlive={gofState} key={`${indexY}${index}`}></Cell>
+                ))
+            )}
         </div>
     )
-}
-
-function seedGameOfLife(width: number, height: number): Array<Array<boolean>> {
-    const seedY: Array<Array<boolean>> = []
-    for (let i = 0; i < height; i++) {
-        const seedX: Array<boolean> = []
-        for (let j = 0; j < width; j++) {
-            seedX.push(Math.floor(Math.random() * 10) % 2 === 0)
-        }
-        seedY.push(seedX)
-    }
-    return seedY
 }
 
 export default App
