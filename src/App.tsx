@@ -1,22 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Cell from './cell/Cell'
-import { seedGameOfLife } from './util'
+import { findNeighbour, seedGameOfLife, willStayAlive } from './util'
 
 function App() {
-    const { height, width } = useState({
-        height: document.documentElement.clientHeight,
-        width: document.documentElement.clientWidth,
-    })[0]
-    const [gofState, setGofState] = useState(
-        seedGameOfLife(Math.floor(width / 20), Math.floor(height / 20))
+    const [gameOfLife, setgameOfLife] = useState(
+        seedGameOfLife(
+            Math.floor(document.documentElement.clientWidth / 20),
+            Math.floor(document.documentElement.clientHeight / 20)
+        )
     )
+
+    useEffect(() => {
+        requestAnimationFrame(() => {
+            setgameOfLife(
+                gameOfLife.map((gameOfLifeY, indexY) =>
+                    gameOfLifeY.map((gameOfLifeX, indexX) => {
+                        const neighbours = findNeighbour(
+                            { x: indexY, y: indexX },
+                            gameOfLife
+                        )
+                        return willStayAlive(gameOfLifeX, neighbours)
+                    })
+                )
+            )
+        })
+    })
 
     return (
         <div className="App">
-            {gofState.map((gofStateY, indexY) =>
-                gofStateY.map((gofState, index) => (
-                    <Cell isAlive={gofState} key={`${indexY}${index}`}></Cell>
+            {gameOfLife.map((gameOfLifeY, indexY) =>
+                gameOfLifeY.map((gameOfLifeX, index) => (
+                    <Cell
+                        isAlive={gameOfLifeX}
+                        key={`${indexY}${index}`}
+                    ></Cell>
                 ))
             )}
         </div>
