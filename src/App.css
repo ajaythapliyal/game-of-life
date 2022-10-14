@@ -3,5 +3,5 @@
     height: 100vh;
     background-color: #DFF6FF;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 30px);
+    grid-template-columns: repeat(auto-fill, 20px);
 }

@@ -9,7 +9,7 @@ function App() {
         width: document.documentElement.clientWidth,
     })[0]
     const [gofState, setGofState] = useState(
-        seedGameOfLife(Math.floor(width / 30), Math.floor(height / 30))
+        seedGameOfLife(Math.floor(width / 20), Math.floor(height / 20))
     )
 
     return (
