@@ -12,7 +12,7 @@ function App() {
     )
 
     useEffect(() => {
-        requestAnimationFrame(() => {
+        setTimeout(() => {
             setgameOfLife(
                 gameOfLife.map((gameOfLifeX, indexY) =>
                     gameOfLifeX.map((gameOfLifeY, indexX) => {
@@ -24,7 +24,7 @@ function App() {
                     })
                 )
             )
-        })
+        }, 100)
     })
 
     return (
