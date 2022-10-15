@@ -14,13 +14,13 @@ function App() {
     useEffect(() => {
         requestAnimationFrame(() => {
             setgameOfLife(
-                gameOfLife.map((gameOfLifeY, indexY) =>
-                    gameOfLifeY.map((gameOfLifeX, indexX) => {
+                gameOfLife.map((gameOfLifeX, indexY) =>
+                    gameOfLifeX.map((gameOfLifeY, indexX) => {
                         const neighbours = findNeighbour(
                             { x: indexY, y: indexX },
                             gameOfLife
                         )
-                        return willStayAlive(gameOfLifeX, neighbours)
+                        return willStayAlive(gameOfLifeY, neighbours)
                     })
                 )
             )
