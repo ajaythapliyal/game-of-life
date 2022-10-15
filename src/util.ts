@@ -6,7 +6,8 @@ export function seedGameOfLife(
     for (let i = 0; i < height; i++) {
         const seedX: Array<boolean> = []
         for (let j = 0; j < width; j++) {
-            seedX.push(Math.floor(Math.random() * 10) % 2 === 0)
+            // seedX.push(Math.floor(Math.random() * 10) % 2 === 0)
+            seedX.push(Math.random() * 10 < 1)
         }
         seedY.push(seedX)
     }
